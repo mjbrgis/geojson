@@ -1,0 +1,195 @@
+{
+   "type": "FeatureCollection",
+   "features": [
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -76.710973,37.270871 ]
+    },
+    "properties": {
+    "NAME":"College of William and Mary",
+    "URL":"https://www.wm.edu",
+    "LABEL":"WM",
+    "LATG":37.270059,
+    "LNGG":-76.70855,
+    "LOGO":"https://live.staticflickr.com/65535/49838532926_7a745a76b0_o.gif",
+    "YOUTUBE":"https://www.youtube.com/watch?v=WOD93sT_GMI",
+    "COLOR1":"#115740",
+    "COLOR2":"#F0B323",
+    "UNDERGRADS":6349
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -78.865814,38.435046 ]
+    },
+    "properties": {
+    "NAME":"James Madison University",
+    "URL":"https://www.jmu.edu",
+    "LABEL":"JMU",
+    "LATG":38.438765,
+    "LNGG":-78.874204,
+    "LOGO":"https://live.staticflickr.com/65535/49837989488_e1b208ac0d_o.png",
+    "YOUTUBE":"https://www.youtube.com/watch?v=QIgluQMLknE",
+    "COLOR1":"#450084",
+    "COLOR2":"#CBB677",
+    "UNDERGRADS":19679
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -79.177,37.353 ]
+    },
+    "properties": {
+    "NAME":"Liberty University",
+    "URL":"https://www.liberty.edu/",
+    "LABEL":"LU",
+    "LATG":37.351592,
+    "LNGG":-79.180411,
+    "LOGO":"https://upload.wikimedia.org/wikipedia/en/b/bb/Liberty_University_logo.png",
+    "YOUTUBE":"https://www.youtube.com/watch?v=jQhxONcmVzs",
+    "COLOR1":"#0A254E",
+    "COLOR2":"#990000",
+    "UNDERGRADS":45370
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -78.396385,37.29859 ]
+    },
+    "properties": {
+    "NAME":"Longwood University",
+    "URL":"http://www.longwood.edu",
+    "LABEL":"LW",
+    "LATG":37.298541,
+    "LNGG":-78.39725,
+    "LOGO":"https://live.staticflickr.com/65535/49838834687_24e6dc0cdf_o_d.png",
+    "YOUTUBE":"https://www.youtube.com/watch?v=zVRCj4rzhss",
+    "COLOR1":"#041E42",
+    "COLOR2":"#FFFFFF",
+    "UNDERGRADS":4028
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -76.3057,36.8859 ]
+    },
+    "properties": {
+    "NAME":"Old Dominion University",
+    "URL":"https://odu.edu/",
+    "LABEL":"ODU",
+    "LATG":36.887531,
+    "LNGG":-76.305862,
+    "LOGO":"https://www.odu.edu/content/dam/odu/logos/univ/png-72dpi/odu-sig-noidea-fullcolor.png",
+    "YOUTUBE":"https://www.youtube.com/watch?v=FgMsvSMj7t4",
+    "COLOR1":"#003057",
+    "COLOR2":"#828A8F",
+    "UNDERGRADS":19194
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.5511,37.1395 ]
+    },
+    "properties": {
+    "NAME":"Radford University",
+    "URL":"https://www.radford.edu",
+    "LABEL":"RU",
+    "LATG":37.139496,
+    "LNGG":-80.552503,
+    "LOGO":"https://upload.wikimedia.org/wikipedia/commons/a/ab/Radford_Highlanders_logo.svg",
+    "YOUTUBE":"https://www.youtube.com/watch?v=s7yZ4m55d1I",
+    "COLOR1":"#C2011B",
+    "COLOR2":"#FFFFFF",
+    "UNDERGRADS":7880
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -77.4745,38.3013 ]
+    },
+    "properties": {
+    "NAME":"University of Mary Washington",
+    "URL":"https://www.umw.edu/",
+    "LABEL":"MW",
+    "LATG":38.299987,
+    "LNGG":-77.474928,
+    "LOGO":"https://www.fotw.info/images/u/us_u_mwa).gif",
+    "YOUTUBE":"https://www.youtube.com/watch?v=JORa4NJ3Zrg",
+    "COLOR1":"#00305E",
+    "COLOR2":"#686663",
+    "UNDERGRADS":4371
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -78.508016,38.033756 ]
+    },
+    "properties": {
+    "NAME":"University of Virginia",
+    "URL":"http://www.virginia.edu",
+    "LABEL":"UVA",
+    "LATG":38.03476,
+    "LNGG":-78.503887,
+    "LOGO":"https://live.staticflickr.com/65535/49837989463_abb8ac40e4_o_d.gif",
+    "YOUTUBE":"https://www.youtube.com/watch?v=F37n22Pj6dU",
+    "COLOR1":"#232D4B",
+    "COLOR2":"#F84C1E",
+    "UNDERGRADS":16405
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -77.452797,37.547942 ]
+    },
+    "properties": {
+    "NAME":"Virginia Commonwealth University",
+    "URL":"https://www.vcu.edu",
+    "LABEL":"VCU",
+    "LATG":37.547178,
+    "LNGG":-77.452855,
+    "LOGO":"https://live.staticflickr.com/65535/49838834662_2df8110063_o_d.gif",
+    "YOUTUBE":"https://www.youtube.com/watch?v=8RQMBLwQus4",
+    "COLOR1":"#000000",
+    "COLOR2":"#FFBA00",
+    "UNDERGRADS":22497
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -80.420243,37.229056 ]
+    },
+    "properties": {
+    "NAME":"Virginia Tech",
+    "URL":"https://www.vt.edu",
+    "LABEL":"VT",
+    "LATG":37.228998,
+    "LNGG":-80.420229,
+    "LOGO":"https://live.staticflickr.com/65535/49838834642_eb7a5c66fe_o_d.gif",
+    "YOUTUBE":"https://www.youtube.com/watch?v=Di71JqE5TgE",
+    "COLOR1":"#6A2C3E",
+    "COLOR2":"#CF4520",
+    "UNDERGRADS":27730
+    }
+  }
+]
+}
