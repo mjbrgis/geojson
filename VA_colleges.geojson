@@ -190,6 +190,25 @@
     "COLOR2":"#CF4520",
     "UNDERGRADS":27730
     }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -76.4936,37.0642 ]
+    },
+    "properties": {
+    "NAME":"Christopher Newport University",
+    "URL":"https://cnu.edu",
+    "LABEL":"CNU",
+    "LATG":37.0642,
+    "LNGG":-76.4936,
+    "LOGO":"https://www.pinclipart.com/picdir/big/546-5468540_christopher-newport-university-logo-png-clipart.png",
+    "YOUTUBE":"https://www.youtube.com/watch?v=1XhAwL5VzsQ",
+    "COLOR1":"#002C76",
+    "COLOR2":"#84888B",
+    "UNDERGRADS":4990
+    }
   }
 ]
 }
