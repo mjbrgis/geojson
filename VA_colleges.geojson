@@ -209,6 +209,25 @@
     "COLOR2":"#84888B",
     "UNDERGRADS":4990
     }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -77.3074,38.8298 ]
+    },
+    "properties": {
+    "NAME":"George Mason University",
+    "URL":"https://gmu.edu",
+    "LABEL":"GMU",
+    "LATG":38.8298,
+    "LNGG":-77.3074,
+    "LOGO":"https://en.wikipedia.org/wiki/George_Mason_Patriots#/media/File:George_Mason_Patriots_logo.svg",
+    "YOUTUBE":"https://www.youtube.com/watch?v=dRsZgYyxgxI",
+    "COLOR1":"#006633",
+    "COLOR2":"#FFCC33",
+    "UNDERGRADS":25508
+    }
   }
 ]
 }
