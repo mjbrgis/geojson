@@ -228,6 +228,25 @@
     "COLOR2":"#FFCC33",
     "UNDERGRADS":25508
     }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -79.4354,37.7915 ]
+    },
+    "properties": {
+    "NAME":"Virginia Military Institute",
+    "URL":"https://vmi.edu",
+    "LABEL":"VMI",
+    "LATG":37.7915,
+    "LNGG":-79.4354,
+    "LOGO":"https://upload.wikimedia.org/wikipedia/en/7/7d/Virginia_Military_Institute_logo.gif",
+    "YOUTUBE":"https://www.youtube.com/watch?v=OBtXGVtQCiM",
+    "COLOR1":"#A71F23",
+    "COLOR2":"#FFD520",
+    "UNDERGRADS":1722
+    }
   }
 ]
 }
