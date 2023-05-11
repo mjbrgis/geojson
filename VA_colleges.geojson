@@ -247,6 +247,25 @@
     "COLOR2":"#FFD520",
     "UNDERGRADS":1722
     }
-  }
+  },
+   {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -77.47743,37.76369 ]
+    },
+    "properties": {
+    "NAME":"Randolph-Macon College",
+    "URL":"https://rmc.edu",
+    "LABEL":"RMC",
+    "LATG":37.761327,
+    "LNGG":-77.477625,
+    "LOGO":"https://en.wikipedia.org/wiki/Randolph%E2%80%93Macon_College#/media/File:R-MC_Logo.jpg",
+    "YOUTUBE":"https://www.youtube.com/watch?v=62PJ5wkjUD4",
+    "COLOR1":"#000000",
+    "COLOR2":"#FFCF00",
+    "UNDERGRADS":1543
+    }
+  }   
 ]
 }
