@@ -248,6 +248,44 @@
     "UNDERGRADS":1722
     }
   },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -77.5389,37.5755 ]
+    },
+    "properties": {
+    "NAME":"University of Richmond",
+    "URL":"https://www.richmond.edu/"
+    "LABEL":"UR",
+    "LATG":37.5755,
+    "LNGG":-77.5389,
+    "LOGO":"https://upload.wikimedia.org/wikipedia/commons/5/51/University_of_Richmond_logo.png",
+    "YOUTUBE":"https://www.youtube.com/watch?v=tF37o089il8",
+    "COLOR1":"#000066",
+    "COLOR2":"#990000",
+    "UNDERGRADS":3202
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -78.9694,38.3789 ]
+    },
+    "properties": {
+    "NAME":"Bridgewater College",
+    "URL":"https://www.bridgewater.edu/"
+    "LABEL":"BC",
+    "LATG":38.3789,
+    "LNGG":-78.9694,
+    "LOGO":"https://en.wikipedia.org/wiki/Bridgewater_Eagles#/media/File:Bridgewater_Eagles_primary_logo.svg",
+    "YOUTUBE":"https://www.youtube.com/watch?v=946nYZ5NKrg",
+    "COLOR1":"#A31F34",
+    "COLOR2":"#8D724A",
+    "UNDERGRADS":1450
+    }
+  },
    {
     "type": "Feature",
     "geometry": {
