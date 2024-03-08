@@ -256,7 +256,7 @@
     },
     "properties": {
     "NAME":"University of Richmond",
-    "URL":"https://www.richmond.edu/"
+    "URL":"https://www.richmond.edu/",
     "LABEL":"UR",
     "LATG":37.5755,
     "LNGG":-77.5389,
@@ -275,7 +275,7 @@
     },
     "properties": {
     "NAME":"Bridgewater College",
-    "URL":"https://www.bridgewater.edu/"
+    "URL":"https://www.bridgewater.edu/",
     "LABEL":"BC",
     "LATG":38.3789,
     "LNGG":-78.9694,
