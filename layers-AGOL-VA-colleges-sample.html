@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <title>collegesLayer | Sample | ArcGIS Maps SDK for JavaScript 4.29</title>
+
+	<link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.29/esri/themes/light/main.css"
+    />
+    <script src="https://js.arcgis.com/4.29/"></script>
+	
+	<style>
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+	  
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;        
+      }
+	  
+	  #colleges-filter {
+        height: 100%;
+        width: 200%;
+        visibility: hidden;
+      }
+
+      .college-item {
+        width: 100%;
+        padding: 12px;
+        text-align: center;
+        vertical-align: baseline;
+        cursor: pointer;
+        height: 100%;
+      }
+
+      .college-item:focus {
+        background-color: dimgrey;
+      }
+
+      .college-item:hover {
+        background-color: dimgrey;
+      }
+	  
+	  #titleDiv {
+        padding: 10px;
+      }
+
+      #titleText {
+        font-size: 20pt;
+        font-weight: 60;
+        padding-bottom: 10px;
+      }	  
+	  
+	  .esriPopup .titlePane {background-color: blue !important;}
+	  
+	  .esri-view-width-xlarge .esri-popup__main-container,
+	  .esri-view-width-large .esri-popup__main-container,
+	  .esri-view-width-medium .esri-popup__main-container
+	  {
+		width: 275px !important;
+		background-color: azure;		
+	  }	  
+	 
+    </style>
+	
+    <script>
+      require([
+		"esri/Map", 
+		"esri/layers/GeoJSONLayer", 
+		"esri/views/MapView",
+		"esri/layers/FeatureLayer",
+		"esri/Color", 
+		"esri/smartMapping/renderers/color", 
+		"esri/core/reactiveUtils",
+		"esri/layers/support/Field",
+		"esri/widgets/FeatureTable",
+		"esri/widgets/ValuePicker",
+		"esri/rest/support/Query",
+		"esri/renderers/UniqueValueRenderer",
+		"esri/Graphic",
+		"esri/layers/GraphicsLayer",
+		"esri/smartMapping/statistics/uniqueValues",
+		"esri/widgets/Expand",
+		"esri/config"
+		], (
+        Map,
+        GeoJSONLayer,
+        MapView,
+		FeatureLayer,
+		Color,
+		colorRendererCreator,
+		reactiveUtils,
+		Field,
+		FeatureTable,
+		ValuePicker,
+		Query,
+		UniqueValueRenderer,
+		Graphic,
+		GraphicsLayer,
+		uniqueValues,
+		Expand,
+		esriConfig
+      ) => 
+	  
+	  {
+        let collegeLayerView;
+		
+		const vaborder =		
+			"https://services.arcgis.com/ue9rwulIoeLEI9bj/arcgis/rest/services/US_StateBoundaries/FeatureServer/0";
+		
+		const url =
+			"https://services1.arcgis.com/7SazdyBTbp9w1Fga/arcgis/rest/services/VA_colleges/FeatureServer/0";
+
+        	let labelClass = {
+                // autocasts as new LabelClassFAT()
+                symbol: {
+                    type: "text",  // autocasts as new TextSymbol()
+					color: "white",
+                    font: {  // autocast as new Font()
+                        family: "Playfair Display",
+                        size: 10,
+						style: "normal",
+                        weight: "bold"
+                    }
+                },
+                labelPlacement: "center-center",
+                labelExpressionInfo: {
+                    expression: "$feature.LABEL"
+                }
+            }
+			
+			// Define a pop-up for VA Colleges
+			const popupColleges = {
+				content: "<div style='text-align: center; text-transform: uppercase; padding: 4px; border: 3px solid lightgrey; background-color:{COLOR1};'><b><font color={COLOR2} size=3 face=Montserrat>{NAME}</font></b></div><div style='text-align: center; padding: 4px; border-bottom: 3px solid lightgrey; border-right: 3px solid lightgrey; border-left: 3px solid lightgrey; background-color: white;'><b><font color={COLOR1} size=2 face=Montserrat><a href={URL} >{URL}</a></font></b></div><div style='text-align: center; padding: 4px; border-bottom: 3px solid lightgrey; border-right: 3px solid lightgrey; border-left: 3px solid lightgrey; background-color: white;'><b><font color={COLOR1} size=2 face=Montserrat>{TYPE}</font></b></div><div style='text-align: center; padding: 4px; border-bottom: 3px solid lightgrey; border-right: 3px solid lightgrey; border-left: 3px solid lightgrey; background-color: {COLOR2};'><b><font color={COLOR1} size=2 face=Montserrat >IPEDS# {UNIQUEID}</font></b></div>"
+			}
+			
+        const vaborderRenderer = {
+			type: "simple",
+			symbol: {
+				type: "simple-line",
+				color: "black",
+				style: "solid",
+				width: 1.5
+			}
+		};
+		
+		const vaborderLayer = new FeatureLayer({
+          url: vaborder,
+		  definitionExpression: "NAME = 'Virginia'",		  
+		  id: "vaborder",
+		  renderer: vaborderRenderer		  
+        });
+		
+		const collegesLayer = new FeatureLayer({
+          url: url,
+		  outFields: ["TYPE"],
+		  id: "colleges",
+		  labelsVisible: false,
+          labelingInfo: labelClass,
+		  popupTemplate: popupColleges,
+        });	
+		
+		collegesLayer.when(function() {
+        // Assuming points:
+        // collegesLayer.renderer.type = 'simple-marker'
+        // Look for all distinct color values, and create UniqueValueRenderer 
+        const theField = 'COLOR1';
+		const theOutline = 'COLOR2'; // this is also the Label color
+		const theLogo = 'LOGO';
+		const theLabel = 'LABEL';
+		const theType = 'TYPE';
+		const theObjectID = 'ObjectId';
+		
+		let query = collegesLayer.createQuery();
+			query.returnGeometry = true;
+			query.outFields = [ "NAME", "COLOR1", "COLOR2", "LABEL", "TYPE", "ObjectId" ];
+
+		collegesLayer.queryFeatures(query).then(function(results){
+			//results.features.forEach((feature)=>{console.log(feature.attributes[theLabel]);});
+			//results.features.forEach((feature)=>{console.log(feature.geometry.latitude);});
+			const renderer = new UniqueValueRenderer({
+              field: theObjectID,
+            });
+			
+			results.features.forEach((feature, index) => {
+			  //console.log(`Unique value ${index}: ${feature.attributes[theOutline]} is the outline and label color`);
+              renderer.addUniqueValueInfo({
+                value: feature.attributes[theObjectID],
+                symbol: {
+                  type: "simple-marker",
+                  color: feature.attributes[theField],
+                  size: "37px",
+				  outline: {
+					color: feature.attributes[theOutline],
+					width: "3px",
+					} 
+                }
+              });
+			  
+			const point = { //Create a point for label text
+				type: "point",
+				longitude: feature.geometry.longitude,
+				latitude: feature.geometry.latitude				
+			};
+			
+			const textSymbol = {
+				type: "text",  // autocasts as new TextSymbol()
+				color: feature.attributes[theOutline],				
+				text: feature.attributes[theLabel],
+				verticalAlignment: "middle",
+				font: {  // autocasts as new Font()
+					size: 9,
+					family: "Playfair Display",
+					weight: "bold"
+				}
+			};			
+			
+			const pointGraphic = new Graphic({
+				geometry: point,
+				symbol: textSymbol				
+			});
+			pointGraphic.attributes = {
+					"SchoolType": feature.attributes[theType],
+					"SchoolLabel": feature.attributes[theLabel]
+				};
+			graphicsLayer.add(pointGraphic);
+			
+			}); // end forEach
+			collegesLayer.renderer = renderer;
+			
+		}); // end query		
+	});	
+		
+		const collegesLayerPublic = new FeatureLayer({
+          url: url,
+		  outFields: ["TYPE"],
+		  definitionExpression: "TYPE = 'Public'",
+		  id: "colleges",
+        });	
+
+		collegesLayerPublic.when(function() {
+        // Assuming points:
+        // collegesLayerPublic.renderer.type = 'simple-marker'
+        // Look for all distinct color values, and create UniqueValueRenderer 
+		const theField = 'COLOR1';
+		const theOutline = 'COLOR2'; // this is also the Label color
+		const theLogo = 'LOGO';
+		const theLabel = 'LABEL';
+		const theType = 'TYPE';
+		const theObjectID = 'ObjectId';
+		
+		let query = collegesLayerPublic.createQuery();
+			query.returnGeometry = true;
+			query.outFields = [ "NAME", "COLOR1", "COLOR2", "LABEL", "TYPE", "ObjectId" ];
+
+		collegesLayerPublic.queryFeatures(query).then(function(results){
+			//results.features.forEach((feature)=>{console.log(feature.attributes[theLabel]);});
+			//results.features.forEach((feature)=>{console.log(feature.geometry.latitude);});
+			const rendererPublic = new UniqueValueRenderer({
+              field: theObjectID,
+            });
+			
+			results.features.forEach((feature, index) => {
+			  //console.log(`Unique value ${index}: ${feature.attributes[theOutline]} is the outline and label color`);
+              rendererPublic.addUniqueValueInfo({
+                value: feature.attributes[theObjectID],
+              });
+			  
+			const pointPublic = { //Create a point for label text
+				type: "point",
+				longitude: feature.geometry.longitude,
+				latitude: feature.geometry.latitude				
+			};
+			
+			const textSymbolPublic = {
+				type: "text",  // autocasts as new TextSymbol()
+				color: feature.attributes[theOutline],				
+				text: feature.attributes[theLabel],
+				verticalAlignment: "middle",
+				font: {  // autocasts as new Font()
+					size: 9,
+					family: "Playfair Display",
+					weight: "bold"
+				}
+			};			
+			
+			const pointGraphicPublic = new Graphic({
+				geometry: pointPublic,
+				symbol: textSymbolPublic,
+				popupTemplate: {
+					title: feature.attributes[theType],
+					content: feature.attributes[theLabel] + " is the Label"        
+				}
+			});
+			pointGraphicPublic.attributes = {
+					"SchoolType": feature.attributes[theType],
+					"SchoolLabel": feature.attributes[theLabel]
+				};
+			graphicsLayerPublic.add(pointGraphicPublic);
+						
+			}); // end forEach
+			collegesLayerPublic.renderer = rendererPublic;
+			
+		}); // end query
+      });
+	  
+	  const collegesLayerPrivate = new FeatureLayer({
+          url: url,
+		  outFields: ["TYPE"],
+		  definitionExpression: "TYPE = 'Private'",
+		  id: "colleges",
+        });	
+
+		collegesLayerPrivate.when(function() {
+        // Assuming points:
+        // collegesLayerPrivate.renderer.type = 'simple-marker'
+        // Look for all distinct color values, and create UniqueValueRenderer 
+		const theField = 'COLOR1';
+		const theOutline = 'COLOR2'; // this is also the Label color
+		const theLogo = 'LOGO';
+		const theLabel = 'LABEL';
+		const theType = 'TYPE';
+		const theObjectID = 'ObjectId';
+		
+		let query = collegesLayerPrivate.createQuery();
+			query.returnGeometry = true;
+			query.outFields = [ "NAME", "COLOR1", "COLOR2", "LABEL", "TYPE", "ObjectId" ];
+
+		collegesLayerPrivate.queryFeatures(query).then(function(results){
+			//results.features.forEach((feature)=>{console.log(feature.attributes[theLabel]);});
+			//results.features.forEach((feature)=>{console.log(feature.geometry.latitude);});
+			const rendererPrivate = new UniqueValueRenderer({
+              field: theObjectID,
+            });
+			
+			results.features.forEach((feature, index) => {
+			  //console.log(`Unique value ${index}: ${feature.attributes[theOutline]} is the outline and label color`);
+              rendererPrivate.addUniqueValueInfo({
+                value: feature.attributes[theObjectID],
+              });
+			  
+			const pointPrivate = { //Create a point for label text
+				type: "point",
+				longitude: feature.geometry.longitude,
+				latitude: feature.geometry.latitude				
+			};
+			
+			const textSymbolPrivate = {
+				type: "text",  // autocasts as new TextSymbol()
+				color: feature.attributes[theOutline],				
+				text: feature.attributes[theLabel],
+				verticalAlignment: "middle",
+				font: {  // autocasts as new Font()
+					size: 9,
+					family: "Playfair Display",
+					weight: "bold"
+				}
+			};			
+			
+			const pointGraphicPrivate = new Graphic({
+				geometry: pointPrivate,
+				symbol: textSymbolPrivate,
+				popupTemplate: {
+					title: feature.attributes[theType],
+					content: feature.attributes[theLabel] + " is the Label"        
+				}
+			});
+			pointGraphicPrivate.attributes = {
+					"SchoolType": feature.attributes[theType],
+					"SchoolLabel": feature.attributes[theLabel]
+				};
+			graphicsLayerPrivate.add(pointGraphicPrivate);
+						
+			}); // end forEach
+			collegesLayerPrivate.renderer = rendererPrivate;
+			
+		}); // end query
+      });
+				
+		const map = new Map({
+          basemap: "streets-relief-vector",
+          layers: [vaborderLayer, collegesLayer, collegesLayerPublic, collegesLayerPrivate]
+        });
+
+        const view = new MapView({
+          container: "viewDiv",
+          center: [-79.5, 37.9],
+          zoom: 7,
+          map: map
+        });		
+		
+		const graphicsLayer = new GraphicsLayer();
+		map.add(graphicsLayer);
+		
+		const graphicsLayerPublic = new GraphicsLayer();
+		//map.add(graphicsLayerPublic);
+		
+		const graphicsLayerPrivate = new GraphicsLayer();
+		//map.add(graphicsLayerPrivate);
+		
+		const collegesNodes = document.querySelectorAll(`.college-item`);
+        const collegesElement = document.getElementById("colleges-filter");
+
+        // click event handler for college type choice
+        collegesElement.addEventListener("click", filterByCollege);
+				
+		// User clicked on Public or Private Schools
+        // set an attribute filter on colleges layer view
+        function filterByCollege(event) {
+          let selectedCollegeType = event.target.getAttribute("TYPE");
+          collegeLayerView.filter = {
+            where: "TYPE = '" + selectedCollegeType + "'"
+          };		  
+			map.remove(graphicsLayer);
+			//map.add(graphicsLayerPublic);
+			map.add(graphicsLayerPrivate);
+			console.log(selectedCollegeType);			
+        }
+		
+		view.whenLayerView(collegesLayer).then((layerView) => {
+          // colleges layer loaded
+          // get a reference to the colleges layerview
+          collegeLayerView = layerView;
+
+          // set up UI items
+          collegesElement.style.visibility = "visible";
+          const collegesExpand = new Expand({
+            view: view,
+            content: collegesElement,
+            expandIcon: "filter",
+            group: "top-left"
+          });
+          
+		  //clear the filters when user closes the expand widget
+          reactiveUtils.when(
+            () => !collegesExpand.expanded,
+            () => {
+              collegeLayerView.filter = null;
+			  map.remove(graphicsLayerPublic);
+			  map.remove(graphicsLayerPrivate);
+			  map.add(graphicsLayer);
+            }
+          );
+		 
+          view.ui.add("titleDiv", "top-right");
+		  view.ui.add(collegesExpand, "top-left");
+		  });
+		
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="colleges-filter" class="esri-widget">
+	  <div class="college-item visible-college" TYPE="Public">Public Schools</div>
+      <div class="college-item visible-college" TYPE="Private">Private Schools</div>
+    </div>
+	<div id="viewDiv"></div>
+	<div id="titleDiv" class="esri-widget" align="center">
+      <div id="titleText">VIRGINIA</div>
+      <div>Colleges and Universities</div>
+    </div>	
+  </body>
+</html>
